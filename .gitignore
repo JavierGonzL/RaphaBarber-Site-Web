@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+**/.env.example
+
+# Build outputs and caches
+**/dist/
+**/.next/
+**/coverage/
+*.tsbuildinfo
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

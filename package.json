@@ -1,0 +1,12 @@
+{
+  "name": "rapha-barber",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n BACK,FRONT -c blue,yellow \"npm run dev --prefix back-end\" \"npm run dev --prefix front-end\"",
+    "dev:back": "npm run dev --prefix back-end",
+    "dev:front": "npm run dev --prefix front-end"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4"
+  }
+}

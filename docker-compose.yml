@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: raphabarber-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: raphabarber
+      POSTGRES_PASSWORD: raphabarber
+      POSTGRES_DB: raphabarber
+    ports:
+      - "5432:5432"
+    volumes:
+      - raphabarber-db-data:/var/lib/postgresql/data
+
+volumes:
+  raphabarber-db-data:

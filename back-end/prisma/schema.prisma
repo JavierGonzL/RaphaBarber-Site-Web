@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Servicio {
+  id          String   @id @default(cuid())
+  nombre      String
+  descripcion String?
+  precio      Float
+  duracion    Int      // minutos
+  categoria   String   // "corte" | "barba" | "combo" | "tratamiento"
+  activo      Boolean  @default(true)
+  orden       Int      @default(0)
+  creadoEn    DateTime @default(now())
+  citas       Cita[]
+}
+
+model Barbero {
+  id          String   @id @default(cuid())
+  nombre      String
+  bio         String?
+  fotografia  String?  // URL de la imagen
+  instagram   String?
+  activo      Boolean  @default(true)
+  creadoEn    DateTime @default(now())
+  citas       Cita[]
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  creadoEn     DateTime @default(now())
+}
+
+model Testimonio {
+  id       String   @id @default(cuid())
+  nombre   String
+  texto    String
+  califica Int      // 1-5
+  aprobado Boolean  @default(false)
+  creadoEn DateTime @default(now())
+}
+
+model Promocion {
+  id             String    @id @default(cuid())
+  titulo         String
+  descripcion    String
+  imagenUrl      String?
+  vigenciaInicio DateTime?
+  vigenciaFin    DateTime?
+  activa         Boolean   @default(true)
+  creadoEn       DateTime  @default(now())
+}
+
+model VideoDestacado {
+  id        String   @id @default(cuid())
+  titulo    String
+  urlTiktok String
+  etiqueta  String?  // ej. "Corte del mes"
+  activo    Boolean  @default(true)
+  orden     Int      @default(0)
+  creadoEn  DateTime @default(now())
+}
+
+model PersonaReconocida {
+  id       String   @id @default(cuid())
+  nombre   String
+  cargo    String?  // ej. "Jugador · Club Pachuca"
+  fotoUrl  String
+  creadoEn DateTime @default(now())
+}
+
+model IntegracionGoogle {
+  id                  String   @id @default(cuid())
+  cuentaEmail         String
+  calendarId          String   @default("primary")
+  refreshTokenCifrado String
+  conectadoEn         DateTime @default(now())
+}
+
+model Cita {
+  id              String   @id @default(cuid())
+  clienteNombre   String
+  clienteTelefono String
+  servicioId      String
+  servicio        Servicio @relation(fields: [servicioId], references: [id])
+  barberoId       String?
+  barbero         Barbero? @relation(fields: [barberoId], references: [id])
+  fecha           DateTime
+  estado          String   @default("pendiente") // "pendiente" | "confirmada" | "cancelada"
+  notas           String?
+  googleEventId   String?
+  creadoEn        DateTime @default(now())
+
+  @@index([fecha])
+}

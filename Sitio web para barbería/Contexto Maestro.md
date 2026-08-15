@@ -1,0 +1,4 @@
+Objetivo del negocio:
+Crear un sitio web para un pequeño emprendimiento de una barbería, la cual destaca por ser una de las barberías elegidas entre los futbolistas del equipo Pachuca, cuenta con redes sociales donde muestra el excelente trabajo de los barberos con tik toks, reels, fotos de cortes de pelo, fotos con futbolistas del Pachuca e incluso artículos firmados por los mismos futbolistas como playeras, balones y fotografías. También destaca por el trato del barbero y sus excelentes cortes.
+Cada visita se vuelve única al disponer de aguas, jugos, refrezcos y cervezas para sus clientes.
+La barbería cuenta con dinámicas donde te puedes ganar servicios de barbería completamente gratis, también apoya a las personas con necesidades especiales al realizar colectas o rifas y cuenta con cursos de aprendizaje a los futuros barberos que se quieren formar.
