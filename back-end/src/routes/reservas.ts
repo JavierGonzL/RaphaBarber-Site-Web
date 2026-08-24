@@ -1,10 +1,10 @@
 import type { FastifyInstance, FastifyRequest } from "fastify";
 import { prisma } from "../lib/prisma.js";
-import { crearEventoDesdeCita } from "../lib/googleCalendar.js";
 import { OFFSET_LOCAL, validarDentroDeHorario } from "../lib/horario.js";
 import { condicionCitaActiva } from "../lib/citas.js";
+import { crearPreferenciaAnticipo, DEPOSITO_MONTO } from "../lib/mercadoPago.js";
 
-const crearCitaSchema = {
+const crearReservaSchema = {
   body: {
     type: "object",
     required: ["clienteNombre", "clienteTelefono", "servicioId", "fecha"],
@@ -18,7 +18,7 @@ const crearCitaSchema = {
   },
 } as const;
 
-type CrearCitaBody = {
+type CrearReservaBody = {
   clienteNombre: string;
   clienteTelefono: string;
   servicioId: string;
@@ -26,11 +26,11 @@ type CrearCitaBody = {
   notas?: string;
 };
 
-export async function citasRoutes(app: FastifyInstance) {
-  app.post<{ Body: CrearCitaBody }>(
-    "/citas",
-    { schema: crearCitaSchema },
-    async (request: FastifyRequest<{ Body: CrearCitaBody }>, reply) => {
+export async function reservasRoutes(app: FastifyInstance) {
+  app.post<{ Body: CrearReservaBody }>(
+    "/reservas",
+    { schema: crearReservaSchema },
+    async (request: FastifyRequest<{ Body: CrearReservaBody }>, reply) => {
       const { clienteNombre, clienteTelefono, servicioId, fecha, notas } = request.body;
 
       const servicio = await prisma.servicio.findUnique({ where: { id: servicioId } });
@@ -65,46 +65,50 @@ export async function citasRoutes(app: FastifyInstance) {
           servicioId,
           fecha: fechaCita,
           notas,
-          estado: "pendiente",
+          estado: "pendiente_pago",
         },
-        include: { servicio: true },
       });
 
-      // La cita ya quedó guardada; si Google falla (o no hay cuenta conectada
-      // todavía), no se bloquea al cliente — se reintenta después a mano.
       try {
-        const googleEventId = await crearEventoDesdeCita(cita);
-        if (googleEventId) {
-          await prisma.cita.update({ where: { id: cita.id }, data: { googleEventId } });
-          cita.googleEventId = googleEventId;
-        }
-      } catch (err) {
-        request.log.error(err, "No se pudo sincronizar la cita con Google Calendar");
-      }
+        const { preferenceId, initPoint } = await crearPreferenciaAnticipo({
+          citaId: cita.id,
+          servicioNombre: servicio.nombre,
+          clienteNombre,
+        });
 
-      return reply.status(201).send(cita);
+        await prisma.pago.create({
+          data: {
+            citaId: cita.id,
+            mpPreferenceId: preferenceId,
+            monto: DEPOSITO_MONTO,
+            estado: "pendiente",
+          },
+        });
+
+        return reply.status(201).send({ citaId: cita.id, initPoint });
+      } catch (err) {
+        request.log.error(err, "No se pudo crear la preferencia de pago en Mercado Pago");
+        await prisma.cita.delete({ where: { id: cita.id } });
+        return reply.status(502).send({ error: "No se pudo iniciar el pago. Intenta de nuevo en unos minutos." });
+      }
     }
   );
 
-  app.get<{ Querystring: { fecha?: string } }>("/citas", async (request, reply) => {
-    const { fecha } = request.query;
-    if (!fecha) {
-      return reply.status(400).send({ error: "Falta el parámetro 'fecha' (YYYY-MM-DD)." });
-    }
-
-    const inicio = new Date(`${fecha}T00:00:00${OFFSET_LOCAL}`);
-    if (Number.isNaN(inicio.getTime())) {
-      return reply.status(400).send({ error: "El parámetro 'fecha' no es válido (usa YYYY-MM-DD)." });
-    }
-    const fin = new Date(inicio.getTime() + 24 * 60 * 60 * 1000);
-
-    return prisma.cita.findMany({
-      where: {
-        fecha: { gte: inicio, lt: fin },
-        ...condicionCitaActiva(),
-      },
-      orderBy: { fecha: "asc" },
+  app.get<{ Params: { citaId: string } }>("/reservas/:citaId", async (request, reply) => {
+    const cita = await prisma.cita.findUnique({
+      where: { id: request.params.citaId },
       include: { servicio: true },
     });
+
+    if (!cita) {
+      return reply.status(404).send({ error: "Reserva no encontrada." });
+    }
+
+    return {
+      id: cita.id,
+      estado: cita.estado,
+      servicio: cita.servicio.nombre,
+      fecha: cita.fecha,
+    };
   });
 }

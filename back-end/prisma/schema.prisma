@@ -92,10 +92,23 @@ model Cita {
   barberoId       String?
   barbero         Barbero? @relation(fields: [barberoId], references: [id])
   fecha           DateTime
-  estado          String   @default("pendiente") // "pendiente" | "confirmada" | "cancelada"
+  estado          String   @default("pendiente") // "pendiente" | "pendiente_pago" | "confirmada" | "cancelada"
   notas           String?
   googleEventId   String?
   creadoEn        DateTime @default(now())
+  pagos           Pago[]
 
   @@index([fecha])
+}
+
+model Pago {
+  id             String   @id @default(cuid())
+  citaId         String
+  cita           Cita     @relation(fields: [citaId], references: [id])
+  mpPreferenceId String
+  mpPaymentId    String?
+  monto          Float
+  estado         String   @default("pendiente") // "pendiente" | "aprobado" | "rechazado"
+  creadoEn       DateTime @default(now())
+  actualizadoEn  DateTime @updatedAt
 }

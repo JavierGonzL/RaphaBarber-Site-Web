@@ -11,14 +11,10 @@
             "id": "d5984b97918c9d61",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "rapha-barber/CLAUDE.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "CLAUDE"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -185,27 +181,36 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "d5984b97918c9d61",
+  "active": "367eb80f2e64ea41",
   "lastOpenFiles": [
-    "front-end/public/images/rapha-wordmark.svg",
+    "Sin título.md",
+    "front-end/public/images/barberia .png",
+    "back-end/uploads/a8eb9ad9-355b-4722-8307-2be1aa0d1dc5.png",
+    "back-end/uploads/8345bc73-0baf-409e-9855-a0f903aecccb.jpg",
+    "back-end/uploads/e93da943-9bea-41e1-96b6-0e1a51c14141.png",
+    "back-end/uploads/715f6ed7-a24d-4dad-8f20-366ea38dced3.png",
+    "front-end/components/sections/Dinamicas.tsx.tmp.7556.959b85e1d871",
+    "front-end/components/sections/Dinamicas.tsx.tmp.7556.61e33530b8b1",
+    "front-end/components/layout/Header.tsx.tmp.7556.511b9d45f36b",
+    "front-end/public/images/Foto1.jpeg",
+    "front-end/public/images/espejo-luz.jpeg",
+    "front-end/public/images/poste-barberia.jpeg",
+    "front-end/app/globals.css.tmp.21460.46d88c1f599d",
+    "front-end/public/images/Espejo con luz.jpeg",
     "front-end/public/images/logo-rapha-barber.svg",
-    "front-end/app/admin/personas/sedkwI3OS",
-    "front-end/app/admin/citas/sedjtqIss",
-    "front-end/components/sections/sedoSiywv",
-    "front-end/components/sections/sedTPKbbb",
-    "front-end/components/sections/sedRsymRC",
-    "front-end/components/sections/sedrT31K3",
-    "front-end/components/sections/sede6uosU",
-    "front-end/components/sections/sed5GOIak",
-    "front-end/components/layout/sedNSQjkE",
-    "front-end/components/layout/sedlXZy5M",
-    "Sitio web para barbería/Decisiones Técnicas/Stack y Arquitectura.md",
     "rapha-barber/CLAUDE.md",
+    "README.md",
+    "back-end/node_modules/mercadopago/dist/clients/order/index.js",
+    "back-end/node_modules/mercadopago/dist/clients/merchantOrder/index.js",
+    "back-end/node_modules/mercadopago/dist/clients/oAuth/index.js",
+    "back-end/node_modules/mercadopago/dist/clients/preference/search/types.js",
+    "back-end/node_modules/mercadopago/dist/clients/preference/search/types.d.ts",
+    "back-end/node_modules/mercadopago/dist/clients/preference/search/index.d.ts",
+    "Sitio web para barbería/Decisiones Técnicas/Stack y Arquitectura.md",
     "Sitio web para barbería/Referencias/Identidad Visual.md",
     "Sitio web para barbería/Referencias/Secciones del Sitio.md",
     "Sitio web para barbería/Contexto Maestro.md",
     "Sitio web para barbería/Colores y logoti.md",
-    "Pasted image 20260808000629.png",
     "Sitio web para barbería/Prompts/Plantilla - Generar Componente.md",
     "Sitio web para barbería/Prompts/Plantilla - Crear Endpoint API.md",
     "Sitio web para barbería/Prompts/Plantilla - Corregir Bug.md",
@@ -223,13 +228,6 @@
     "rapha-barber/node_modules/pure-rand/README.md",
     "rapha-barber/node_modules/pure-rand/CHANGELOG.md",
     "rapha-barber/node_modules/prisma/README.md",
-    "rapha-barber/node_modules/elkjs/README.md",
-    "rapha-barber/node_modules/elkjs/LICENSE.md",
-    "rapha-barber/node_modules/retry/equation.gif",
-    "rapha-barber/public/globe.svg",
-    "rapha-barber/public/window.svg",
-    "rapha-barber/public/vercel.svg",
-    "rapha-barber/public/next.svg",
-    "rapha-barber/public/file.svg"
+    "rapha-barber/node_modules/elkjs/README.md"
   ]
 }
