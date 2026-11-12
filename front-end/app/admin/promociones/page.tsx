@@ -71,7 +71,7 @@ export default function PromocionesAdminPage() {
       <p className="text-xs text-[#7C97B2] uppercase tracking-widest mb-2">Panel</p>
       <h1 className="font-display text-4xl text-white tracking-wide mb-10">PROMOCIONES</h1>
 
-      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-6 space-y-4 mb-12">
+      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-4 sm:p-6 space-y-4 mb-12">
         <div>
           <label className={labelClass}>Título</label>
           <input required value={titulo} onChange={(e) => setTitulo(e.target.value)} className={inputClass} />
@@ -87,7 +87,7 @@ export default function PromocionesAdminPage() {
           />
         </div>
         <ImageUploadField label="Imagen (opcional)" value={imagenUrl} onChange={setImagenUrl} />
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelClass}>Vigente desde</label>
             <input
@@ -122,10 +122,10 @@ export default function PromocionesAdminPage() {
 
       <div className="space-y-px bg-[#2E3E4F]/10">
         {items.map((promo) => (
-          <div key={promo.id} className="bg-[#000000] p-5 flex items-start justify-between gap-4">
-            <div>
+          <div key={promo.id} className="bg-[#000000] p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="min-w-0">
               <h3 className="text-white font-semibold">{promo.titulo}</h3>
-              <p className="text-[#9CA3AF] text-sm mt-1">{promo.descripcion}</p>
+              <p className="text-[#9CA3AF] text-sm mt-1 break-words">{promo.descripcion}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <button

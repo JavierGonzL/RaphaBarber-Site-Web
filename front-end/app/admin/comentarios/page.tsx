@@ -70,7 +70,7 @@ export default function ComentariosAdminPage() {
         . Solo las aprobadas se muestran en el sitio.
       </p>
 
-      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-6 space-y-4 mb-12">
+      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-4 sm:p-6 space-y-4 mb-12">
         <div>
           <label className={labelClass}>Nombre del cliente</label>
           <input required value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} />
@@ -114,12 +114,12 @@ export default function ComentariosAdminPage() {
 
       <div className="space-y-px bg-[#2E3E4F]/10">
         {items.map((t) => (
-          <div key={t.id} className="bg-[#000000] p-5 flex items-start justify-between gap-4">
-            <div>
+          <div key={t.id} className="bg-[#000000] p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="min-w-0">
               <h3 className="text-white font-semibold">
                 {t.nombre} <span className="text-[#7C97B2] text-sm">{"★".repeat(t.califica)}</span>
               </h3>
-              <p className="text-[#9CA3AF] text-sm mt-1">{t.texto}</p>
+              <p className="text-[#9CA3AF] text-sm mt-1 break-words">{t.texto}</p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <button

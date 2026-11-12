@@ -33,7 +33,7 @@ export default function ImageUploadField({
   return (
     <div>
       <label className="block text-xs text-[#9CA3AF] uppercase tracking-widest mb-2">{label}</label>
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         {value && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -47,7 +47,7 @@ export default function ImageUploadField({
           accept="image/jpeg,image/png,image/webp,image/gif"
           onChange={handleFile}
           disabled={uploading}
-          className="text-sm text-[#9CA3AF] file:mr-4 file:border file:border-[#9CA3AF]/30 file:bg-transparent file:text-[#7C97B2] file:px-3 file:py-1.5 file:text-xs file:uppercase file:tracking-widest"
+          className="min-w-0 max-w-full text-sm text-[#9CA3AF] file:mr-4 file:border file:border-[#9CA3AF]/30 file:bg-transparent file:text-[#7C97B2] file:px-3 file:py-1.5 file:text-xs file:uppercase file:tracking-widest"
         />
       </div>
       {uploading && <p className="text-xs text-[#9CA3AF] mt-2">Subiendo...</p>}

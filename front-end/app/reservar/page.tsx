@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Calendario } from "@/components/ui/Calendario";
 import { hoyLocal, OFFSET_LOCAL } from "@/lib/horario";
 import { useDisponibilidad } from "@/lib/useDisponibilidad";
 
@@ -26,6 +28,7 @@ export default function ReservarPage() {
   const [clienteNombre, setClienteNombre] = useState("");
   const [clienteTelefono, setClienteTelefono] = useState("");
   const [notas, setNotas] = useState("");
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
 
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +48,7 @@ export default function ReservarPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!servicioId || !hora) return;
+    if (!servicioId || !hora || !aceptaTerminos) return;
     setError(null);
     setEnviando(true);
 
@@ -104,13 +107,7 @@ export default function ReservarPage() {
 
           <div>
             <label className={labelClass}>Fecha</label>
-            <input
-              type="date"
-              min={hoyLocal()}
-              value={fecha}
-              onChange={(e) => setFecha(e.target.value)}
-              className={inputClass}
-            />
+            <Calendario value={fecha} onChange={setFecha} />
           </div>
 
           <div>
@@ -175,9 +172,29 @@ export default function ReservarPage() {
             Pago (tarjeta o efectivo en OXXO). El resto se paga en la barbería.
           </p>
 
+          <label className="flex items-start gap-3 text-xs text-[#9CA3AF]">
+            <input
+              type="checkbox"
+              checked={aceptaTerminos}
+              onChange={(e) => setAceptaTerminos(e.target.checked)}
+              className="mt-0.5 accent-[#7C97B2]"
+            />
+            <span>
+              He leído y acepto el{" "}
+              <Link href="/aviso-privacidad" target="_blank" className="text-[#7C97B2] hover:underline">
+                Aviso de Privacidad
+              </Link>{" "}
+              y los{" "}
+              <Link href="/terminos-condiciones" target="_blank" className="text-[#7C97B2] hover:underline">
+                Términos y Condiciones
+              </Link>
+              .
+            </span>
+          </label>
+
           <button
             type="submit"
-            disabled={!servicioId || !hora || enviando}
+            disabled={!servicioId || !hora || !aceptaTerminos || enviando}
             className="w-full border border-[#7C97B2] text-[#7C97B2] px-6 py-3.5 text-sm tracking-widest uppercase hover:bg-[#2E3E4F] hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {enviando ? "Redirigiendo a Mercado Pago..." : "Ir a pagar el anticipo"}

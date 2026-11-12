@@ -38,7 +38,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen bg-[#000000]">
-      <div className="border-b border-[#2E3E4F]/20 px-6 py-4 flex items-center justify-between">
+      <div className="border-b border-[#2E3E4F]/20 px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
         <a href="/admin" className="text-xs text-[#7C97B2] uppercase tracking-widest">
           ← Panel de administración
         </a>
@@ -49,7 +49,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
           Cerrar sesión
         </button>
       </div>
-      <div className="px-6 py-12 max-w-4xl mx-auto">{children}</div>
+      <div className="px-4 sm:px-6 py-8 sm:py-12 max-w-4xl mx-auto">{children}</div>
     </div>
   );
 }

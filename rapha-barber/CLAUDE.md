@@ -57,10 +57,10 @@ prisma/
 - [x] Hero, Servicios, Nosotros, Dinámicas, Contacto
 - [x] Schema Prisma definido
 - [ ] Datos reales en componentes (actualmente hardcodeados)
-- [ ] Conexión a base de datos (DATABASE_URL pendiente)
-- [ ] Galería con fotos reales
-- [ ] Embeds de TikTok/Instagram
-- [ ] Google Maps embed
+- [x] Conexión a base de datos (DATABASE_URL pendiente)
+- [x] Galería con fotos reales
+- [x] Embeds de TikTok/Instagram
+- [x] Google Maps embed
 
 ## Fase 2 (pendiente) — Reservas Online
 - Sistema de citas (modelo `Cita` ya en schema)
@@ -75,7 +75,5 @@ NEXT_PUBLIC_SITE_URL=  # URL del sitio
 ```
 
 ## Notas importantes
-- WhatsApp links usan formato: `https://wa.me/${NEXT_PUBLIC_WHATSAPP}`
-- Número de WhatsApp real: reemplazar `521XXXXXXXXXX` en Header, Hero y Contacto
-- Imágenes de fondo del Hero en: `public/images/hero-bg.jpg` (pendiente de agregar)
+
 - Sin autenticación aún; agregar `TODO: auth` donde sea necesario en Fase 2

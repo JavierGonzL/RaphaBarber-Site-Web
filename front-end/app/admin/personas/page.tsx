@@ -57,7 +57,7 @@ export default function PersonasAdminPage() {
       <p className="text-xs text-[#7C97B2] uppercase tracking-widest mb-2">Panel</p>
       <h1 className="font-display text-4xl text-white tracking-wide mb-10">PERSONAS RECONOCIDAS</h1>
 
-      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-6 space-y-4 mb-12">
+      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-4 sm:p-6 space-y-4 mb-12">
         <div>
           <label className={labelClass}>Nombre</label>
           <input required value={nombre} onChange={(e) => setNombre(e.target.value)} className={inputClass} />
@@ -94,8 +94,8 @@ export default function PersonasAdminPage() {
               alt=""
               className="w-14 h-14 object-cover border border-[#9CA3AF]/30 shrink-0"
             />
-            <div className="flex-1">
-              <h3 className="text-white font-semibold">{persona.nombre}</h3>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-white font-semibold break-words">{persona.nombre}</h3>
               {persona.cargo && <p className="text-[#9CA3AF] text-sm">{persona.cargo}</p>}
             </div>
             <button

@@ -9,7 +9,7 @@ const redes = [
 export default function Footer() {
   return (
     <footer className="bg-[#0A0A0A] border-t border-[#2E3E4F]/20 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div>
           <div className="flex items-center gap-2 mb-4">
@@ -56,6 +56,28 @@ export default function Footer() {
                 </a>
               </li>
             ))}
+          </ul>
+        </div>
+        {/* Legal */}
+        <div>
+          <p className="text-xs text-[#7C97B2] uppercase tracking-widest mb-4">Legal</p>
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/aviso-privacidad"
+                className="text-sm text-[#9CA3AF] hover:text-[#7C97B2] transition-colors"
+              >
+                Aviso de Privacidad
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terminos-condiciones"
+                className="text-sm text-[#9CA3AF] hover:text-[#7C97B2] transition-colors"
+              >
+                Términos y Condiciones
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

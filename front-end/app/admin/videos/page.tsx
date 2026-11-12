@@ -60,7 +60,7 @@ export default function VideosAdminPage() {
       <p className="text-xs text-[#7C97B2] uppercase tracking-widest mb-2">Panel</p>
       <h1 className="font-display text-4xl text-white tracking-wide mb-10">CORTE DEL MES</h1>
 
-      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-6 space-y-4 mb-12">
+      <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-4 sm:p-6 space-y-4 mb-12">
         <div>
           <label className={labelClass}>Título</label>
           <input required value={titulo} onChange={(e) => setTitulo(e.target.value)} className={inputClass} />
@@ -76,7 +76,7 @@ export default function VideosAdminPage() {
             className={inputClass}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelClass}>Etiqueta</label>
             <input value={etiqueta} onChange={(e) => setEtiqueta(e.target.value)} className={inputClass} />
@@ -106,8 +106,8 @@ export default function VideosAdminPage() {
 
       <div className="space-y-px bg-[#2E3E4F]/10">
         {items.map((video) => (
-          <div key={video.id} className="bg-[#000000] p-5 flex items-start justify-between gap-4">
-            <div>
+          <div key={video.id} className="bg-[#000000] p-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="min-w-0">
               <h3 className="text-white font-semibold">{video.titulo}</h3>
               <p className="text-[#9CA3AF] text-sm mt-1 break-all">{video.urlTiktok}</p>
               {video.etiqueta && <p className="text-[#7C97B2] text-xs mt-1 uppercase tracking-widest">{video.etiqueta}</p>}

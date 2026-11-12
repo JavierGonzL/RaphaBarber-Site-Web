@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AdminGuard from "@/components/admin/AdminGuard";
+import { Calendario } from "@/components/ui/Calendario";
 import { hoyLocal, OFFSET_LOCAL } from "@/lib/horario";
 import { useDisponibilidad } from "@/lib/useDisponibilidad";
 
@@ -96,9 +97,13 @@ export default function CitasAdminPage() {
       <form onSubmit={handleSubmit} className="border border-[#2E3E4F]/20 p-6 space-y-6">
         <div>
           <label className={labelClass}>Servicio</label>
-          <select value={servicioId} onChange={(e) => setServicioId(e.target.value)} className={inputClass}>
+          <select
+            value={servicioId}
+            onChange={(e) => setServicioId(e.target.value)}
+            className={`${inputClass} bg-[#000000]`}
+          >
             {servicios.map((s) => (
-              <option key={s.id} value={s.id}>
+              <option key={s.id} value={s.id} className="bg-[#000000] text-white">
                 {s.nombre} — ${s.precio} ({s.duracion} min)
               </option>
             ))}
@@ -107,13 +112,7 @@ export default function CitasAdminPage() {
 
         <div>
           <label className={labelClass}>Fecha</label>
-          <input
-            type="date"
-            min={hoyLocal()}
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-            className={inputClass}
-          />
+          <Calendario value={fecha} onChange={setFecha} />
         </div>
 
         <div>
